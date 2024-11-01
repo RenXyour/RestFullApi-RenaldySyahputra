@@ -15,11 +15,10 @@ You need to have PHP version 8.2 or above.
 7. Run `php artisan db:seed`
 9. Run `php artisan key:generate`
 10. Run `php artisan serve` to start the project at `http://127.0.0.1:8000`
+11. Import File 
 
 
-## Insomnia Documentation
 
-[Insomnia Link](your_insomnia_link_here)
 
 ## License
 
