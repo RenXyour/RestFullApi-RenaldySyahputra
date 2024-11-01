@@ -10,14 +10,12 @@ You need to have PHP version 8.2 or above.
 2. Go to the project root directory
 3. Run `composer install`
 4. Create database
-5. Copy `.env.example` into `.env` file and adjust parameters
-6. Run `php artisan migrate --seed`
-7. Run `php artisan key:generate`
-8. Run `php artisan serve` to start the project at `http://127.0.0.1:8000`
+5. adjust .env files
+6. Run `php artisan migrate`
+7. Run `php artisan db:seed`
+9. Run `php artisan key:generate`
+10. Run `php artisan serve` to start the project at `http://127.0.0.1:8000`
 
-## Postman Documentation
-
-[Postman Link](your_postman_link_here)
 
 ## Insomnia Documentation
 
