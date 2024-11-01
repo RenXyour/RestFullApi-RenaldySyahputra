@@ -11,23 +11,30 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+    $category = $request->query('category');
+
+    if ($category) {
+        $products = Product::where('category', $category)->get();
+    } else {
         $products = Product::all();
+    }
 
-        if ($products->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No products found'
-            ], 404);
-        }
-
+    if ($products->isEmpty()) {
         return response()->json([
-            'success' => true,
-            'message' => 'Products retrieved successfully',
-            'data' => $products
+            'success' => false,
+            'message' => 'No products found'
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Products retrieved successfully',
+        'data' => $products
         ], 200);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -167,4 +174,32 @@ class ProductController extends Controller
             'message' => 'Product deleted successfully'
         ], 200);
     }
+
+    public function searchByName(Request $request)
+    {
+    $query = $request->query('name');
+    
+    if (!$query) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Please provide a product name to search'
+        ], 400);
+    }
+
+    $products = Product::where('product_name', 'LIKE', '%' . $query . '%')->get();
+
+    if ($products->isEmpty()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'No products found with the specified name'
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Products found',
+        'data' => $products
+        ], 200);
+    }
+
 }

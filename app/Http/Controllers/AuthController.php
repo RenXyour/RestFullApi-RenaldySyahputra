@@ -72,7 +72,22 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // add logic delete user token
-        // then return response json with success true
+        $request->user()->currentAccessToken()->delete();
+
+         return response()->json([
+        'success' => true,
+        'message' => 'Logout successful'
+        ], 200);
     }
+
+    public function getAllUsers()
+    {
+    $users = User::all(['id', 'name', 'email', 'created_at']); // Pilih field yang akan ditampilkan
+
+    return response()->json([
+        'success' => true,
+        'data' => $users
+        ], 200);
+    }
+
 }
